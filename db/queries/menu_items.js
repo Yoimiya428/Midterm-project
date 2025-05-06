@@ -7,4 +7,19 @@ const getMenuItems = () => {
 });
  }
 
- module.exports = { getMenuItems};
+ const addMenuItem = function (menuItem) {
+  return db.query(`INSERT INTO menu_item (name, photo_url, description, price)
+       VALUES ($1, $2, $3, $4)
+       RETURNING *;`,
+      [menuItem.name, menuItem.photo_url, menuItem.description, menuItem.price])
+    .then((result) => {
+      console.log(result.rows, 'creating menu item');
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+      throw err; // Re-throw the error so the caller can handle it
+    });
+};
+
+ module.exports = { getMenuItems, addMenuItem };

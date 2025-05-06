@@ -4,6 +4,10 @@ require('dotenv').config();
 // Web server config
 const express = require('express');
 const morgan = require('morgan');
+//const router  = express.Router();
+const menuQueries = require('./db/queries/menu_items');
+const addMenuItems = require('./db/queries/menu_items');
+
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -28,9 +32,7 @@ const usersRoutes = require('./routes/users');
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 
-//const express = require('express');
-const router  = express.Router();
-const menuQueries = require('./db/queries/menu_items');
+
 
 app.get('/', (req, res) => {
   menuQueries.getMenuItems()
@@ -53,10 +55,44 @@ app.get('/', (req, res) => {
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
   res.render('index');
+}); */
+
+app.get('/addMenuItem', (req, res) => {
+  res.render('admin');
 });
+
+
+
+//====ALL POST METHODS HERE======
+app.post('/addMenuItem', (req, res) => {
+  const { name, photo_url, description, price } = req.body;
+
+  if (!name || !description || price === undefined || price < 0) {
+    return res.status(400).json({ message: "Invalid data.  Name, description, and a non-negative price are required." });
+  }
+
+  const newMenuItem = {
+    name,
+    photo_url,
+    description,
+    price: parseFloat(price),
+  };
+
+  menuQueries.addMenuItem(newMenuItem)
+    .then(insertedMenuItem => {
+      res.status(201).json({ message: 'Menu item added successfully', item: insertedMenuItem });
+    })
+    .catch(error => {
+      console.error("Error adding menu item:", error);
+      res.status(500).json({ message: 'Internal server error', error: error.message });
+    });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+
