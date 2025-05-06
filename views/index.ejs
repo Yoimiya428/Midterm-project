@@ -26,8 +26,12 @@
 
         <li><%= item.name %>
           <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;">
-          <p><%= item.description %>  -  <%= item.price %> </p>
-
+          <%= item.description %>  -  <%= item.price %>
+          <form action="/add-to-cart" method="post">
+            <input type="hidden" name="itemId" value="<%= item.id %>">
+            <input type="number" name="quantity" value="1" min="1">
+            <button type="submit">Add to Cart</button>
+          </form>
         </li>
       <% } %>
     <% } else { %>
