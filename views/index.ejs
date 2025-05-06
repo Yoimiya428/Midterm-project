@@ -12,32 +12,50 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/styles.css"/>
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
-  <h1>Select from our Menu</h1>
-  <ul>
-    <% if (menu && menu.length > 0) { %>
-      <% for (const item of menu) { %>
+  <header>
+    <div class="order-info">
+        <span>Order<%= "(2 items)" %> items</span> |
+        <span>Total<%= "$$" %></span>
+        <span><i class="fas fa-user"></i></span>
+    </div>
+</header>
 
-        <li><%= item.name %>
-          <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;">
-          <%= item.description %>  -  <%= item.price %>
-          <form action="/add-to-cart" method="post">
-            <input type="hidden" name="itemId" value="<%= item.id %>">
-            <input type="number" name="quantity" value="1" min="1">
-            <button type="submit">Add to Cart</button>
-          </form>
-        </li>
-      <% } %>
+  <h1>Have fun! 🥔</h1>
+
+  <section class="menu-section">
+    <h2>Select from our Menu</h2>
+    <div class="menu-container">
+    <% if (menu && menu.length > 0) { %>
+        <% for (const item of menu) { %>
+            <div class="food-item">
+                <div class="food-item-details">
+                    <h3><%= item.name %>
+                      <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;"> &nbsp &nbsp <%= item.price %>
+                      <h3>
+
+                    <p><%= item.description %></p>
+                </div>
+                <div class="add-to-cart ">
+                <form action="/add-to-cart" method="post">
+                    <input type="hidden" name="itemId" value="<%= item.id %>">
+                    <button type="submit">Add to Cart</button>
+                </form> </div>
+            </div>
+        <% } %>
     <% } else { %>
-      <li>No menu items to display</li>
+        <p>No menu items to display</p>
     <% } %>
-  </ul>
+    </div>
+</section>
+
+
 </body>
 
 </html>
