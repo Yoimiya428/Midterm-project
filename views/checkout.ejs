@@ -27,7 +27,9 @@
     </div>
   </div><br>
     <div class="form">
-    <form action="" method="post">
+    <form action="/checkout" method="post">
+      <label for="customer">Enter your name:</label>
+      <input type="text" id="customer" name="customer" placeholder="You name" required><br>
       <label for="enterNumber">Enter your mobile number:</label>
       <input id="enterNumber" name="enterNumber" type="tel" placeholder="+19876543210" pattern="[0-9]{10}" required>
       <button type="submit">Place Order</button>
