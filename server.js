@@ -7,6 +7,7 @@ const morgan = require('morgan');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
+app.use(express.json());
 
 app.set('view engine', 'ejs');
 
@@ -26,9 +27,26 @@ const usersRoutes = require('./routes/users');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
-app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes);
-app.use('/users', usersRoutes);
+
+//const express = require('express');
+const router  = express.Router();
+const menuQueries = require('./db/queries/menu_items');
+
+app.get('/', (req, res) => {
+  menuQueries.getMenuItems()
+    .then(menuItems => {
+      //Once you have the view for this page, you can switch it to res.render('homepage');
+      //res.json({ menuItems });
+      res.render('index', { menu: menuItems });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+//module.exports = router;
 // Note: mount other resources here, using the same pattern above
 
 // Home page

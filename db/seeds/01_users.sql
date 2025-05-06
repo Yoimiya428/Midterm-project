@@ -8,7 +8,7 @@ VALUES
 
 INSERT INTO menu_item (name, photo_url, description, price)
 VALUES
-  ('Salad', 'https://example.com/salad.jpg', 'Fresh garden salad with dressing', 5.75),
+  ('Salad', 'https://marathonmouth.me/wp-content/uploads/2021/07/community-foods-8.jpg?w=1024', 'Fresh garden salad with dressing', 5.75),
   ('Pasta', 'https://example.com/pasta.jpg', 'Spaghetti with tomato basil sauce', 10.25),
   ('Garlic Bread', 'https://example.com/garlic_bread.jpg', 'Toasted garlic bread slices', 3.50),
   ('Soda', 'https://example.com/soda.jpg', 'Chilled soft drink can', 1.99);

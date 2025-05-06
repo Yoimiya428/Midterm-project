@@ -19,6 +19,21 @@
 
 <body>
   <h1>Have fun! 🥔</h1>
+  <h1>Select from our Menu</h1>
+  <ul>
+    <% if (menu && menu.length > 0) { %>
+      <% for (const item of menu) { %>
+
+        <li><%= item.name %>
+          <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;">
+          <p><%= item.description %>  -  <%= item.price %> </p>
+
+        </li>
+      <% } %>
+    <% } else { %>
+      <li>No menu items to display</li>
+    <% } %>
+  </ul>
 </body>
 
 </html>
