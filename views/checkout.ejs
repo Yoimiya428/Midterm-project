@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <title>Home Page</title>
+  <title>Check out</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -15,11 +14,25 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
-  <a href="./checkout">Checkout</a>
-</body>
+  <header>Restaurant_Name</header>
+  <div class="checkout-cart">
+    <span>Order (2 items)</span>
+    <span>| Total $$</span>
+    <span>Notification Icon</span>
+  </div>
+    <form action="" method="post">
+      <label for="enterNumber">Enter your mobile number:</label><br>
+      <input id="enterNumber" name="enterNumber" type="tel" placeholder="+19876543210" pattern="[0-9]{10}" required>
+      <button type="submit">Place Order</button>
+    </form>
 
+  <div>
+
+  </div>
+
+</body>
 </html>

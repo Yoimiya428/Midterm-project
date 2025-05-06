@@ -5,7 +5,7 @@ const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_AUTH;
 const client = require('twilio')(accountSid, authToken);
 
-const sendSMS = (body, phoneNumber) => { //parameter 'body' will be replaced by number input from form
+const sendSMS = (body, phoneNumber) => {
   const msgOptions = {
     from: process.env.TWILIO_PHONE,
     to: phoneNumber,
@@ -21,9 +21,16 @@ const sendSMS = (body, phoneNumber) => { //parameter 'body' will be replaced by 
     });
 };
 
-getPhoneNumber(3) //user id will be passed as a parameter here
-  .then(phone => {
-    sendSMS('Hey [Name], your order will be ready in xx minutes!', phone)
+getPhoneNumber(6) //user id will be passed as a parameter here
+  .then(user => {
+    console.log('User info:', user);
+
+  sendSMS(`Hey ${user.name}, your order will be ready in xx minutes!`, user.contact_number);
+
+  setTimeout(() => {
+    sendSMS(`Hey ${user.name}, your order is ready to pick up!`, user.contact_number);
+  }, 10000);
+
   })
   .catch(err => {
     console.error('Could not send SMS', err.message);
