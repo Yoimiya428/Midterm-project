@@ -21,7 +21,7 @@ const sendSMS = (body, phoneNumber) => {
     });
 };
 
-getPhoneNumber(6) //user id will be passed as a parameter here
+getPhoneNumber(6) //user id passed as a parameter here
   .then(user => {
     console.log('User info:', user);
 

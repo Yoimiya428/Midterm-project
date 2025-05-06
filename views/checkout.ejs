@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="../styles/checkout.scss">
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
@@ -18,18 +19,20 @@
 </head>
 
 <body>
-  <header>Restaurant_Name</header>
-  <div class="checkout-cart">
-    <span>Order (2 items)</span>
-    <span>| Total $$</span>
+  <div class="header">
+    <span>Restaurant_Name</span>
+    <div>
+    <span>Order (2 items)</span><span> | Total $$</span>
     <span>Notification Icon</span>
-  </div>
+    </div>
+  </div><br>
+    <div class="form">
     <form action="" method="post">
-      <label for="enterNumber">Enter your mobile number:</label><br>
+      <label for="enterNumber">Enter your mobile number:</label>
       <input id="enterNumber" name="enterNumber" type="tel" placeholder="+19876543210" pattern="[0-9]{10}" required>
       <button type="submit">Place Order</button>
     </form>
-
+    </div>
   <div>
 
   </div>
