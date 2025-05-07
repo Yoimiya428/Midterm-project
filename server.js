@@ -5,9 +5,12 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 //const router  = express.Router();
-const menuQueries = require('./db/queries/menu_items');
-const addMenuItem = require('./db/queries/menu_items');
-
+const {
+  getMenuItems,
+  addMenuItem,
+  getMenuItemById,
+  updateMenuItem,
+} = require('./db/queries/menu_items');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -33,22 +36,18 @@ const usersRoutes = require('./routes/users');
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 
 
-
 app.get('/', (req, res) => {
-  menuQueries.getMenuItems()
+  getMenuItems()
     .then(menuItems => {
-      //Once you have the view for this page, you can switch it to res.render('homepage');
       //res.json({ menuItems });
       res.render('index', { menu: menuItems });
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
-//module.exports = router;
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -60,9 +59,30 @@ app.get('/admin', (req, res) => {
   res.render('admin');
 });
 
+app.get('/admin/menu', (req, res) => {
+  getMenuItems()
+    .then(menuItems => {
+      res.render('admin_menu', { menu: menuItems });
+    });
+});
+
+app.get('/admin/menu/update/:id', (req, res) => {
+  const itemId = req.params.id;
+  getMenuItemById(itemId)
+    .then((menuItem) => {
+      if (!menuItem) {
+        return res.status(404).send('Menu item not found');
+      }
+      res.render('admin_update_menu', { item: menuItem });
+    })
+    .catch((error) => {
+      console.error('Error fetching menu item for edit:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
 
 
-//====ALL POST METHODS HERE=====
+//====ALL POSTs METHODS HERE=====
 app.post('/admin', (req, res) => {
   const { name, photo_url, description, price } = req.body;
 
@@ -74,10 +94,10 @@ app.post('/admin', (req, res) => {
     name,
     photo_url,
     description,
-    price: parseFloat(price),
+    price
   };
 
-  menuQueries.addMenuItem(newMenuItem)
+  addMenuItem(newMenuItem)
     .then(insertedMenuItem => {
       res.status(201).json({ message: 'New menu items successfully added ', item: insertedMenuItem });
     })
@@ -87,9 +107,39 @@ app.post('/admin', (req, res) => {
     });
 });
 
+app.post('/admin/menu/update/:id', (req, res) => {
+  const itemId = req.params.id;
+  const { name, photo_url, description, price } = req.body;
+
+  if (!name || !description || price === undefined || isNaN(price) || price < 0) {
+    return res.status(400).json({ message: "Invalid data: Name, description, and a non-negative price are required to continue" });
+  }
+
+  const updatedMenuItemData = {
+    name,
+    photo_url,
+    description,
+    price: parseFloat(price),
+  };
+
+  updateMenuItem(itemId, updatedMenuItemData)
+    .then((updatedMenuItem) => {
+      if (!updatedMenuItem) {
+        return res.status(404).json({ message: 'Menu item not found' });
+      }
+      res.redirect('/admin/menu');
+    })
+    .catch((error) => {
+      console.error('Error updating menu item:', error);
+      res.status(500).json({ message: 'Internal server error', error: error.message });
+    });
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+
+
 
 

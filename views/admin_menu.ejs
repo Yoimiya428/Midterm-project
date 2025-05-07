@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/styles.css"/>
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+</head>
+<body>
+
+  <div class="menu-container" id="menu-items-list">
+    <span id="admin_span">
+      <h3>Menu</h3>
+      <p><a href="/admin" class="add-button">Add New Menu Item</a></p>
+    </span>
+      <% if (menu && menu.length > 0) { %>
+          <% for (const item of menu) { %>
+              <div class="food-item">
+                  <div class="food-item-details">
+                      <h3 class="food-item-name"><%= item.name %>
+                          <span class="food-item-price"><%= item.price %></span>
+                      </h3>
+                      <p class="food-item-description"><%= item.description %></p>
+                  </div>
+                  <div class="menu-item-actions">
+                      <button class="edit-button" onclick="window.location.href='/admin/menu/update/<%= item.id %>'">Edit</button>
+                      <button class="delete-button" onclick="deleteItem('<%= item.id %>')">Delete</button>
+                  </div>
+              </div>
+          <% } %>
+      <% } else { %>
+          <p>No menu items to display</p>
+      <% } %>
+  </div>
+
+
+</body>
+</html>
