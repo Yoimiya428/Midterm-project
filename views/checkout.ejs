@@ -3,27 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Checkout</title>
+  <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
-  <h1>Checkout</h1>
+  <main class="checkout-form-container">
+    <h1>Checkout</h1>
 
-  <% if (typeof message !== 'undefined') { %>
-    <p style="color: red;"><%= message %></p>
-  <% } %>
+    <% if (message) { %>
+      <div class="error-message" style="color: red; margin-bottom: 1em;">
+        <%= message %>
+      </div>
+    <% } %>
 
-  <form action="/checkout" method="POST">
-    <div>
-      <label for="userName">Name:</label>
-      <input type="text" id="userName" name="userName" required>
-    </div>
+    <form action="/checkout" method="POST">
+      <div>
+        <label for="userName">Name (optional):</label><br>
+        <input type="text" name="userName" id="userName" placeholder="Your name">
+      </div>
 
-    <div>
-      <label for="phoneNumber">Phone Number:</label>
-      <input type="text" id="phoneNumber" name="phoneNumber" pattern="\d{10}" required>
-      <small>Enter a 10-digit number</small>
-    </div>
+      <div>
+        <label for="phoneNumber">Phone Number:</label><br>
+        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="1234567890" required>
+      </div>
 
-    <button type="submit">Submit Order</button>
-  </form>
+      <div style="margin-top: 1em;">
+        <button type="submit" class="submit_btn">Submit Order</button>
+      </div>
+    </form>
+  </main>
 </body>
 </html>

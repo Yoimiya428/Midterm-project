@@ -3,39 +3,43 @@ const router = express.Router();
 const db = require('../db/connection');
 
 router.post('/checkout', async (req, res) => {
-  const { phoneNumber } = req.body;
+  const { phoneNumber, userName } = req.body;
 
   if (!phoneNumber || phoneNumber.length !== 10) {
-    return res.status(400).json({ message: 'Invalid phone number! Please try again!' });
+    return res.render('checkout', { message: 'Invalid phone number!' });
   }
 
+  try {
+    const userResult = await db.query(
+      `SELECT * FROM users WHERE contact_number = $1;`,
+      [phoneNumber]
+    );
 
-  db.query(`SELECT * FROM users WHERE contact_number = $1;`, [phoneNumber])
-  .then(userSelected => {
-    if (userSelected.rows.length > 0) {
-      return userSelected.rows[0];
+    let user;
+    if (userResult.rows.length > 0) {
+      user = userResult.rows[0];
+    } else {
+      const insertUser = await db.query(
+        `INSERT INTO users (name, contact_number) VALUES ($1, $2) RETURNING *;`,
+        [userName || 'Guest', phoneNumber]
+      );
+      user = insertUser.rows[0];
     }
 
-    return db.query(
-      `INSERT INTO users (name, contact_number) VALUES ($1, $2) RETURNING *;`,
-      [userName, phoneNumber]
-    ).then(newUser => newUser.rows[0]);
-  })
-  .then(user => {
-    return db.query(
-      `INSERT INTO orders (user_id, total_price, order_time) VALUES ($1, 0, now()) RETURNING *;`,
+    const newOrderResult = await db.query(
+      `INSERT INTO orders (user_id, total_price, order_time, ready_time)
+       VALUES ($1, 0, NOW(), NOW() + interval '30 minutes') RETURNING *;`,
       [user.id]
-    );//set the price to be 0 for now, then revise it to capture the price of the items in the cart
-  })
-  .then(orderDetails => {
-    const newOrder = orderDetails.rows[0];
-    res.redirect(`/orders/${newOrder.id}`);
-  })
-  .catch(err => {
-    console.error('Error:', err);
-    res.status(500).json({ message: 'Sorry, there is an error encountered during checkout, please try again.' });
-  });
-});
+    );
 
+    const newOrder = newOrderResult.rows[0];
+
+    res.redirect(`/orders/${newOrder.id}`);
+
+  } catch (err) {
+    console.error('Error during checkout:', err);
+    res.status(500).render('checkout', { message: 'Server error. Please try again.' });
+  }
+});
 
 module.exports = router;
