@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 const getMenuItems = () => {
-  return db.query('SELECT * FROM menu_item;')
+  return db.query('SELECT * FROM menu_item ORDER BY menu_item.id DESC;')
  .then(data => {
   return data.rows
 });

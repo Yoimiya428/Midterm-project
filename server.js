@@ -6,7 +6,7 @@ const express = require('express');
 const morgan = require('morgan');
 //const router  = express.Router();
 const menuQueries = require('./db/queries/menu_items');
-const addMenuItems = require('./db/queries/menu_items');
+const addMenuItem = require('./db/queries/menu_items');
 
 
 const PORT = process.env.PORT || 8080;
@@ -55,18 +55,15 @@ app.get('/', (req, res) => {
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-/* app.get('/', (req, res) => {
-  res.render('index');
-}); */
 
-app.get('/addMenuItem', (req, res) => {
+app.get('/admin', (req, res) => {
   res.render('admin');
 });
 
 
 
-//====ALL POST METHODS HERE======
-app.post('/addMenuItem', (req, res) => {
+//====ALL POST METHODS HERE=====
+app.post('/admin', (req, res) => {
   const { name, photo_url, description, price } = req.body;
 
   if (!name || !description || price === undefined || price < 0) {
@@ -82,10 +79,10 @@ app.post('/addMenuItem', (req, res) => {
 
   menuQueries.addMenuItem(newMenuItem)
     .then(insertedMenuItem => {
-      res.status(201).json({ message: 'Menu item added successfully', item: insertedMenuItem });
+      res.status(201).json({ message: 'New menu items successfully added ', item: insertedMenuItem });
     })
     .catch(error => {
-      console.error("Error adding menu item:", error);
+      console.error("Error in adding menu item:", error);
       res.status(500).json({ message: 'Internal server error', error: error.message });
     });
 });
