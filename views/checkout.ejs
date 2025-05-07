@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+</head>
+<body>
+  <h1>Checkout</h1>
+
+  <% if (typeof message !== 'undefined') { %>
+    <p style="color: red;"><%= message %></p>
+  <% } %>
+
+  <form action="/checkout" method="POST">
+    <div>
+      <label for="userName">Name:</label>
+      <input type="text" id="userName" name="userName" required>
+    </div>
+
+    <div>
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" pattern="\d{10}" required>
+      <small>Enter a 10-digit number</small>
+    </div>
+
+    <button type="submit">Submit Order</button>
+  </form>
+</body>
+</html>

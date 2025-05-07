@@ -17,8 +17,8 @@ router.post('/checkout', async (req, res) => {
     }
 
     return db.query(
-      `INSERT INTO users (contact_number) VALUES ($1) RETURNING *;`,
-      [phoneNumber]
+      `INSERT INTO users (name, contact_number) VALUES ($1, $2) RETURNING *;`,
+      [userName, phoneNumber]
     ).then(newUser => newUser.rows[0]);
   })
   .then(user => {
