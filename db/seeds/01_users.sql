@@ -1,3 +1,5 @@
+
+
 INSERT INTO users (name, contact_number)
 VALUES
   ('John Doe', '123-456-7890'),

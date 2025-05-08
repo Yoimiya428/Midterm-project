@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>Home Page</title>
-
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
@@ -17,45 +15,64 @@
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
-
 <body>
-  <header>
-    <div class="order-info">
-        <span>Order<%= "(2 items)" %> items</span> |
-        <span>Total<%= "$$" %></span>
-        <span><i class="fas fa-user"></i></span>
-    </div>
-</header>
 
-  <h1>Have fun! 🥔</h1>
+  <h1>Enjoy your meal 🥔</h1>
+
+  <section class="cart-section">
+    <h2>Your Cart</h2>
+    <% if (!cart || cart.length === 0) { %>
+      <p>Your cart is empty.</p>
+    <% } else { %>
+      <ul>
+        <% for (const item of cart) { %>
+          <li>
+            <%= item.name %> × <%= item.quantity %> = $
+            <%= typeof item.price === 'number' ? (item.price * item.quantity).toFixed(2) : 'N/A' %>
+          </li>
+        <% } %>
+      </ul>
+      <p><strong>Total Items:</strong> <%= cartItemCount || 0 %></p>
+      <p><strong>Total Price:</strong> $
+        <%= typeof cartTotal === 'number' ? cartTotal.toFixed(2) : 'N/A' %>
+      </p>
+    <% } %>
+  </section>
+
+  <section class="checkout-section" style="margin: 20px 0;">
+    <form action="/checkout" method="post">
+      <button type="submit" class="submit_btn">Proceed to Checkout</button>
+    </form>
+  </section>
+
 
   <section class="menu-section">
     <h2>Select from our Menu</h2>
     <div class="menu-container">
-    <% if (menu && menu.length > 0) { %>
+      <% if (menu && menu.length > 0) { %>
         <% for (const item of menu) { %>
-            <div class="food-item">
-                <div class="food-item-details">
-                    <h3><%= item.name %>
-                      <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;"> &nbsp &nbsp <%= item.price %>
-                      <h3>
-
-                    <p><%= item.description %></p>
-                </div>
-                <div class="add-to-cart ">
-                <form action="/add-to-cart" method="post">
-                    <input type="hidden" name="itemId" value="<%= item.id %>">
-                    <button type="submit" class="submit_btn">Add to Cart</button>
-                </form> </div>
+          <div class="food-item">
+            <div class="food-item-details">
+              <h3>
+                <%= item.name %>
+                <img src="<%= item.photo_url %>" style="max-width: 100px; max-height: 100px;"> &nbsp;&nbsp;
+                $<%= typeof item.price === 'number' ? item.price.toFixed(2) : 'N/A' %>
+              </h3>
+              <p><%= item.description %></p>
             </div>
+            <div class="add-to-cart">
+              <form action="/add-to-cart" method="post">
+                <input type="hidden" name="itemId" value="<%= item.id %>">
+                <button type="submit" class="submit_btn">Add to Cart</button>
+              </form>
+            </div>
+          </div>
         <% } %>
-    <% } else { %>
+      <% } else { %>
         <p>No menu items to display</p>
-    <% } %>
+      <% } %>
     </div>
-</section>
-
+  </section>
 
 </body>
-
 </html>

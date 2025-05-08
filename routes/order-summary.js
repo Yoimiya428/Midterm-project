@@ -36,14 +36,16 @@ const db = require('../db/connection');
 // });
 
 
+
 router.get('/', (req, res) => {
+  const order = req.session.order;
+
   res.render('order-summary', {
-    orderNumber: '10001',
-    totalPrice: 6,
+    orderNumber: order.orderNumber,
+    totalPrice: order.totalPrice,
     status: 'Processing',
     waitTime: { minutes: 10 }
   });
 });
-
 
 module.exports = router;

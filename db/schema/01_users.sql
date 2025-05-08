@@ -17,7 +17,6 @@ CREATE TABLE orders (
   order_time TIMESTAMP
 );
 
--- Menu items
 CREATE TABLE menu_item (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255),
@@ -26,7 +25,7 @@ CREATE TABLE menu_item (
   price MONEY
 );
 
--- Order items
+-- Order items    
 CREATE TABLE order_item (
   id SERIAL PRIMARY KEY NOT NULL,
   order_id INTEGER NOT NULL REFERENCES orders(id),
@@ -34,4 +33,6 @@ CREATE TABLE order_item (
   quantity INTEGER,
   description TEXT
 );
+
+
 

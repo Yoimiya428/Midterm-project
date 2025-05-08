@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -31,5 +31,53 @@
       </div>
     </form>
   </main>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <main class="checkout-form-container">
+    <h1>Checkout</h1>
+
+    <% if (message) { %>
+      <div class="error-message" style="color: red; margin-bottom: 1em;">
+        <%= message %>
+      </div>
+    <% } %>
+
+    <form id="checkout-form" action="/checkout" method="POST">
+      <div>
+        <label for="userName">Name (optional):</label><br>
+        <input type="text" name="userName" id="userName" placeholder="Your name">
+      </div>
+
+      <div>
+        <label for="phoneNumber">Phone Number:</label><br>
+        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="1234567890" required>
+      </div>
+
+      <!-- Hidden input to store serialized cart -->
+      <input type="hidden" name="cart" id="cart-data" />
+
+      <div style="margin-top: 1em;">
+        <button type="submit" class="submit_btn">Submit Order</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('checkout-form').addEventListener('submit', function (e) {
+      // Fetch the cart from localStorage
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      document.getElementById('cart-data').value = JSON.stringify(cart);
+    });
+  </script>
 </body>
 </html>

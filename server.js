@@ -36,16 +36,17 @@ const usersRoutes = require('./routes/users');
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 
 
-app.get('/', (req, res) => {
-  getMenuItems()
-    .then(menuItems => {
-      //res.json({ menuItems });
-      res.render('index', { menu: menuItems });
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
-});
+//disable for now, save for later
+// app.get('/', (req, res) => {
+//   getMenuItems()
+//     .then(menuItems => {
+//       //res.json({ menuItems });
+//       res.render('index', { menu: menuItems });
+//     })
+//     .catch(err => {
+//       res.status(500).json({ error: err.message });
+//     });
+// });
 
 
 // Note: mount other resources here, using the same pattern above
@@ -140,6 +141,17 @@ app.post('/admin/menu/update/:id', (req, res) => {
 
 
 //newly added
+const session = require('express-session');
+
+app.use(session({
+  secret: 'top secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 30 * 60 * 1000 } 
+}));
+
+
+
 
 const summaryRoutes = require('./routes/order-summary');
 app.use('/order-summary', summaryRoutes);
@@ -153,27 +165,123 @@ app.get('/checkout', (req, res) => {
 // app.use('/checkout', checkoutRoutes);
 
 app.post('/checkout', (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta http-equiv="refresh" content="1;url=/order-summary" />
-        <script>
-          setTimeout(() => {
-            window.location.href = '/order-summary';
-          }, 1000);
-        </script>
-        <title>Redirecting</title>
-      </head>
-      <body>
-        <p>Thank you for your order! Redirecting to order summary...</p>
-      </body>
-    </html>
-  `);
+  const orderNumber = Math.floor(Math.random() * 10000); 
+  const cart = temporaryCart;
+
+  const totalPrice = cart.reduce((sum, item) => {
+    return sum + (item.price * item.quantity);
+  }, 0);
+
+  req.session.order = {
+    orderNumber,
+    totalPrice: totalPrice.toFixed(2),
+  };
+
+  temporaryCart.length = 0;
+
+  res.redirect('/order-summary');
 });
 
+
+const temporaryCart = [];
+
+app.post('/add-to-cart', (req, res) => {
+  const itemId = parseInt(req.body.itemId);
+
+  getMenuItemById(itemId)  
+    .then(item => {
+      if (!item) return res.status(404).send('Item not found');
+
+
+      const existing = temporaryCart.find(i => i.id === item.id);
+      if (existing) {
+        existing.quantity += 1;  // If the item is already in the cart, increase its quantity
+      } else {
+
+        temporaryCart.push({ ...item, quantity: 1 });
+      }
+
+      res.redirect('/');
+    })
+    .catch(err => {
+      console.error("Add-to-cart error:", err);
+      res.status(500).send("Server error");
+    });
+});
+
+
+app.get('/', (req, res) => {
+  getMenuItems()
+    .then(menuItems => {
+
+      menuItems.forEach(item => {
+        item.price = parseFloat(item.price);
+      });
+
+      const cart = temporaryCart; 
+
+      let total = 0;
+      let itemCount = 0;
+
+      for (const item of cart) {
+        console.log(`Calculating: ${item.name}, price: ${item.price}, qty: ${item.quantity}`);
+        total += item.price * item.quantity;
+        itemCount += item.quantity;
+      }
+
+      const cartTotal = !isNaN(total) ? total : 0;
+
+      res.render('index', {
+        menu: menuItems,
+        cart,
+        cartItemCount: itemCount,
+        cartTotal: cartTotal,
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send("Error loading menu");
+    });
+});
+
+
+
+
+
+
+
+// app.get('/', (req, res) => {
+//   getMenuItems()
+//     .then(menu => {
+//       const cart = req.session.cart || [];
+//       res.render('index', { menu, cart });
+//     })
+//     .catch(err => {
+//       res.status(500).json({ error: err.message });
+//     });
+// });
 
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
