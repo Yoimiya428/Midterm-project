@@ -4,6 +4,8 @@ require('dotenv').config();
 // Web server config
 const express = require('express');
 const morgan = require('morgan');
+const session = require('express-session');
+
 //const router  = express.Router();
 const {
   getMenuItems,
@@ -16,7 +18,18 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 app.use(express.json());
 
+
 app.set('view engine', 'ejs');
+const db = require('./db/connection');
+
+const crypto = require('crypto');
+const secretKey = crypto.randomBytes(32).toString('hex');
+app.use(session({
+  secret: secretKey,  //  Change this to a strong, random string!
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } //  Set to true if using HTTPS
+}));
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -134,6 +147,27 @@ app.post('/admin/menu/update/:id', (req, res) => {
       res.status(500).json({ message: 'Internal server error', error: error.message });
     });
 });
+
+
+app.get('/add-to-cart', (req, res) => {
+  res.render('index')
+})
+
+//====ADMIN TO DELETE====
+
+/* app.delete('/admin/menu/:id', (req, res) => {
+  const itemId = req.params.id;
+
+  db.query('UPDATE menu_items SET is_active = false WHERE id = $1;', [itemId])
+    .then(() => {
+      res.json({ message: 'Menu item soft deleted successfully' });
+    })
+    .catch(err => {
+      console.error('Database error deleting menu item:', err);
+      res.status(500).json({ error: 'Failed to delete menu item', details: err.message }); // Include details
+    });
+}); */
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

@@ -62,6 +62,17 @@ const updateMenuItem = function (id, menuItem) {
     });
 };
 
+/* const deleteMenuItemById = function (id) {
+  return db.query(`DELETE FROM menu_item WHERE id = $1;`, [id])
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.error('Error deleting menu item:', err.message);
+      throw err;
+    });
+}; */
+
 //====EXPORT THE FUNCTIONS=======
 module.exports = { getMenuItems, addMenuItem, getMenuItemById, updateMenuItem };
 

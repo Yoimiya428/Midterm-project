@@ -19,19 +19,18 @@
 </head>
 
 <body>
-  <header>
-    <div class="order-info">
-        <span>Order<%= "(2 items)" %> items</span> |
-        <span>Total<%= "$$" %></span>
-        <span><i class="fas fa-user"></i></span>
+  <header id="myHeader">
+    <div id="shop_title">
+      <h1>My Restaurant</h1>
     </div>
-</header>
 
-  <h1>Have fun! 🥔</h1>
+    <div id="cart-info">
+      Order: <span id="cart-quantity">0</span> | Total: $<span id="cart-total">0.00</span>
+    </div>
+  </header>
 
   <section class="menu-section">
-    <h2>Select from our Menu</h2>
-    <div class="menu-container">
+    <div class="menu-container"> <h3>Select from our Menu</h3>
     <% if (menu && menu.length > 0) { %>
         <% for (const item of menu) { %>
             <div class="food-item">
@@ -39,14 +38,14 @@
                     <h3><%= item.name %>
                       <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;"> &nbsp &nbsp <%= item.price %>
                       <h3>
-
-                    <p><%= item.description %></p>
+                    <p class="description"><%= item.description %> </p>
                 </div>
                 <div class="add-to-cart ">
-                <form action="/add-to-cart" method="post">
+                  <form  class="add-to-cart-form" action="/add-to-cart" method="post">
                     <input type="hidden" name="itemId" value="<%= item.id %>">
                     <button type="submit" class="submit_btn">Add to Cart</button>
-                </form> </div>
+                </form>
+              </div>
             </div>
         <% } %>
     <% } else { %>
@@ -54,8 +53,20 @@
     <% } %>
     </div>
 </section>
+<script>
+  window.onscroll = function() {myFunction()};
 
+  let fixedHeader = document.getElementById("myHeader");
+  let sticky = fixedHeader.offsetTop;
 
+  function myFunction() {
+    if (window.pageYOffset > sticky) {
+      fixedHeader.classList.add("sticky");
+    } else {
+      fixedHeader.classList.remove("sticky");
+    }
+  }
+  </script>
 </body>
 
 </html>

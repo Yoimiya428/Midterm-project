@@ -5,6 +5,11 @@ header {
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
+  height: 100px;
+  background-color: aliceblue;
+  width: 100%;
+  padding: 20px 20px;
+
 }
 
 .food-item {
@@ -25,20 +30,33 @@ header {
 }
 
 .add-to-cart {
-  background-color: #4caf50;
+  background-color: #704caf;
   color: white;
   padding: 8px 15px;
   border: none;
   border-radius: 5px;
   margin-top: 10px;
 }
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
 
 add-to-cart:hover{
   cursor: pointer;
-  color: orange;
+  color: rgb(0, 30, 255);
 
 }
 .menu-container {
   gap: 20px;
   border: 1px solid grey;
 }
+.description{
+  font-family: sans-serif;
+  font-size: smaller;
+  color:dimgray;
+  padding: 0 auto;
+}
+
+
