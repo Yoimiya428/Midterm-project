@@ -28,8 +28,8 @@ app.use(express.static('public'));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
-const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
+const checkoutRoute = require('./routes/checkout');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -147,7 +147,7 @@ app.use(session({
   secret: 'top secret',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 10 * 60 * 1000 } 
+  cookie: { maxAge: 10 * 60 * 1000 }
 }));
 
 
@@ -165,7 +165,7 @@ app.get('/checkout', (req, res) => {
 // app.use('/checkout', checkoutRoutes);
 
 app.post('/checkout', (req, res) => {
-  const orderNumber = Math.floor(Math.random() * 10000); 
+  const orderNumber = Math.floor(Math.random() * 10000);
   const cart = temporaryCart;
 
   const totalPrice = cart.reduce((sum, item) => {
@@ -188,7 +188,7 @@ const temporaryCart = [];
 app.post('/add-to-cart', (req, res) => {
   const itemId = parseInt(req.body.itemId);
 
-  getMenuItemById(itemId)  
+  getMenuItemById(itemId)
     .then(item => {
       if (!item) return res.status(404).send('Item not found');
 
@@ -218,7 +218,7 @@ app.get('/', (req, res) => {
         item.price = parseFloat(item.price);
       });
 
-      const cart = temporaryCart; 
+      const cart = temporaryCart;
 
       let total = 0;
       let itemCount = 0;
