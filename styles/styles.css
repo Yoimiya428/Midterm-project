@@ -1,32 +1,47 @@
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%; 
   height: 100px;
   background-color: white;
-  width: 100%;
-  padding: 20px 20px;
+  padding: 20px;
 
-  z-index: 1000;
-
+  z-index: 1000; 
 }
 
-.header-right {
+.header-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 100%; 
+  padding: 0 40px; 
+  box-sizing: border-box;
+}
+
+/* .header-right {
   display: flex;
   align-items: center;
-  gap: 20px; /* spacing between cart-info and button */
-}
+  gap: 20px; 
+} */
+
+
 
 .checkout_btn {
-  padding: 8px 12px;
+  padding: 10px 20px;
+  font-size: 16px;
   background-color: black;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 12px;
+}
+
+.header-right {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 
@@ -36,6 +51,11 @@ header {
   align-items: flex-start;
   margin-bottom: 15px;
   padding-bottom: 15px;
+
+  margin-left: 50px;
+  margin-top: 30px;
+
+
 }
 
 .food-item-details {
@@ -44,18 +64,21 @@ header {
   align-items: flex-start;
   margin-right: 20px;
   flex: 1;
-  border: 1px solid black;
+
 }
 
 .add-to-cart-form .submit_btn {
   background-color: lightgray;
   color: black;
+  font-size: large;
+  margin-right: 150px;
+  font-weight: bold;
 
   padding: 8px 15px;
   border: none;
   outline: none;
   box-shadow: none;
-  margin-top: 10px;
+  margin-top: 20px;
   cursor: pointer;
 }
 
@@ -73,7 +96,10 @@ add-to-cart:hover{
   background-color: lightgrey;
 
   border-radius: 12px;
+  
 }
+
+
 .description{
   font-family: sans-serif;
   font-size: smaller;

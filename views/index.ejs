@@ -20,20 +20,23 @@
 
   <div class="body-container">
     <header id="myHeader">
-      <div id="shop_title">
-        <h1>Tom Hartins</h1>
-      </div>
+      <div class="header-container">
 
-      <div class="header-right">
-        <div id="cart-info">
-          Order: <span id="cart-quantity">0</span> | Total: $<span id="cart-total">0.00</span>
+        <div id="shop_title">
+          <h1>Tom Hartins</h1>
         </div>
 
-        <form action="/checkout" method="post">
-          <button type="submit" class="checkout_btn">Proceed to Checkout</button>
-        </form>
-      </div>
+        <div class="header-right">
+          <div id="cart-info">
+            Order: <span id="cart-quantity">0</span> | Total: $<span id="cart-total">0.00</span>
+          </div>
 
+          <form action="/checkout" method="post">
+            <button type="submit" class="checkout_btn">Proceed to Checkout</button>
+          </form>
+        </div>
+        
+      </div>
     </header>
 
     <div class="menu_headline">
@@ -41,27 +44,34 @@
     </div>
 
     <section class="menu-section">
-      <div class="menu-container"> <h3>Select from our Menu</h3>
-      <% if (menu && menu.length > 0) { %>
-          <% for (const item of menu) { %>
-              <div class="food-item">
+      <div class="menu-container"> 
+        <!-- <h3 style="margin-left: 50px;">Select from our Menu</h3> -->
+        <% if (menu && menu.length > 0) { %>
+            <% for (const item of menu) { %>
+                <div class="food-item">
+
                   <div class="food-item-details">
-                      <h3><%= item.name %>
-                        <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;"> &nbsp &nbsp <%= item.price %>
-                        <h3>
-                      <p class="description"><%= item.description %> </p>
+                    <img src="<%= item.photo_url %>" style="max-width: 100px; max-height: 100px; display: block; margin-bottom: 8px;">
+                  
+                    <h3>
+                      <%= item.name %> ------- <%= item.price %>
+                    </h3>
+                  
+                    <p class="description"><%= item.description %></p>
                   </div>
-                  <div class="add-to-cart ">
-                    <form  class="add-to-cart-form" action="/add-to-cart" method="post">
-                      <input type="hidden" name="itemId" value="<%= item.id %>">
-                      <button type="submit" class="submit_btn">Add to Cart</button>
-                    </form>
-                  </div>
-              </div>
-          <% } %>
-      <% } else { %>
-          <p>No menu items to display</p>
-      <% } %>
+
+
+                    <div class="add-to-cart ">
+                      <form  class="add-to-cart-form" action="/add-to-cart" method="post">
+                        <input type="hidden" name="itemId" value="<%= item.id %>">
+                        <button type="submit" class="submit_btn">Add to Cart</button>
+                      </form>
+                    </div>
+                </div>
+            <% } %>
+        <% } else { %>
+            <p>No menu items to display</p>
+        <% } %>
       </div>
     </section>
 
