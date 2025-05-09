@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Summary</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <main class="order-summary">
+    <h1>Order Summary</h1>
+
+    <p><strong>Order Number:</strong> <%= orderNumber %></p>
+    <p><strong>Total Price:</strong> $<%= totalPrice %></p>
+    <p><strong>Status:</strong> <%= status %></p>
+    <p><strong>Estimated Wait Time:</strong> <%= waitTime ? Math.ceil(waitTime.minutes) : 30 %> minutes</p>
+
+    <!-- <a href="/past-order">Past Orders</a> -->
+  </main>
+</body>
+</html>
