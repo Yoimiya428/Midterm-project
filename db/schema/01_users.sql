@@ -14,8 +14,7 @@ CREATE TABLE orders (
   user_id INTEGER NOT NULL REFERENCES users(id),
   total_price MONEY,
   ready_time TIMESTAMP,
-  order_time TIMESTAMP,
-
+  order_time TIMESTAMP
 );
 
 CREATE TABLE menu_item (
@@ -25,7 +24,7 @@ CREATE TABLE menu_item (
   description TEXT,
   price MONEY,
   is_active BOOLEAN DEFAULT true,
-  processing_time INT;
+  processing_time INT
 );
 
 -- Order items

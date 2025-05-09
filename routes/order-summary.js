@@ -6,10 +6,10 @@ const db = require('../db/connection');
 //   const orderId = req.params.id;
 
 //   db.query(`
-//     SELECT id, 
-//            total_price, 
-//            order_time, 
-//            ready_time, 
+//     SELECT id,
+//            total_price,
+//            order_time,
+//            ready_time,
 //            (ready_time - order_time) AS wait_time
 //     FROM orders
 //     WHERE id = $1;
@@ -36,15 +36,12 @@ const db = require('../db/connection');
 // });
 
 
-
 router.get('/', (req, res) => {
-  const order = req.session.order;
-
   res.render('order-summary', {
-    orderNumber: order.orderNumber,
-    totalPrice: order.totalPrice,
-    status: 'Processing',
-    waitTime: { minutes: 10 }
+    orderNumber: 1234,  // hardcoded order number for demo
+    totalPrice: 50.00,  // hardcoded total price for demo
+    status: 'Processing',  // hardcoded status for demo
+    waitTime: { minutes: 10 }  // hardcoded wait time for demo
   });
 });
 

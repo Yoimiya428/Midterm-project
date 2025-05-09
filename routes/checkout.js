@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
         sendSMS(`Hey ${user.name}, your order is ready to pick up!`, user.contact_number);
       }, 10000);
 
-      res.send('order has been placed');
+      res.redirect('/order-summary');
     })
     .catch(err => {
       console.error(err.message);
