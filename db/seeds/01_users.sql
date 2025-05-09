@@ -6,12 +6,12 @@ VALUES
   ('Bob Lee', '444-444-4444'),
   ('Charlie Brown', '333-333-3333');
 
-INSERT INTO menu_item (name, photo_url, description, price)
+INSERT INTO menu_item (name, photo_url, description, price, is_active, processing_time)
 VALUES
-  ('Salad', 'https://example.com/salad.jpg', 'Fresh garden salad with dressing', 5.75),
-  ('Pasta', 'https://example.com/pasta.jpg', 'Spaghetti with tomato basil sauce', 10.25),
-  ('Garlic Bread', 'https://example.com/garlic_bread.jpg', 'Toasted garlic bread slices', 3.50),
-  ('Soda', 'https://example.com/soda.jpg', 'Chilled soft drink can', 1.99);
+  ('Salad', 'https://example.com/salad.jpg', 'Fresh garden salad with dressing', 5.75, true, 10),
+  ('Pasta', 'https://example.com/pasta.jpg', 'Spaghetti with tomato basil sauce', 10.25, true, 20),
+  ('Garlic Bread', 'https://example.com/garlic_bread.jpg', 'Toasted garlic bread slices', 3.50, true, 5),
+  ('Soda', 'https://example.com/soda.jpg', 'Chilled soft drink can', 1.99, true,5);
 
 INSERT INTO orders (user_id, total_price, ready_time, order_time)
 VALUES

@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
       const user = result.rows[0];
       console.log('Saved number:', user);
 
-      sendSMS(`Hey ${user.name}, your order will be ready in xx minutes!`, user.contact_number);
+      sendSMS(`Hey ${user.name}, your order will be ready in 15 minutes!`, user.contact_number);
 
       setTimeout(() => {
         sendSMS(`Hey ${user.name}, your order is ready to pick up!`, user.contact_number);
