@@ -26,6 +26,7 @@ header {
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 12px;
 }
 
 
@@ -70,6 +71,8 @@ add-to-cart:hover{
   gap: 20px;
   border: 1px solid lightgrey;
   background-color: lightgrey;
+
+  border-radius: 12px;
 }
 .description{
   font-family: sans-serif;
@@ -82,4 +85,11 @@ add-to-cart:hover{
   position: fixed;
   top: 0;
   width: 100%;
+}
+
+.menu_headline {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 20px;
 }

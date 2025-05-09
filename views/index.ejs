@@ -15,122 +15,134 @@
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
+
 <body>
 
-  <header id="myHeader">
-    <div id="shop_title">
-      <h1>Tom Hartins</h1>
-    </div>
+  <div class="body-container">
 
-    <div class="header-right">
-      <div id="cart-info">
-        Order: <span id="cart-quantity">0</span> | Total: $<span id="cart-total">0.00</span>
+    
+
+
+    <header id="myHeader">
+      <div id="shop_title">
+        <h1>Tom Hartins</h1>
       </div>
-  
-      <form action="/checkout" method="post">
-        <button type="submit" class="checkout_btn">Proceed to Checkout</button>
-      </form>
-    </div>
 
-  </header>
+      <div class="header-right">
+        <div id="cart-info">
+          Order: <span id="cart-quantity">0</span> | Total: $<span id="cart-total">0.00</span>
+        </div>
+    
+        <form action="/checkout" method="post">
+          <button type="submit" class="checkout_btn">Proceed to Checkout</button>
+        </form>
+      </div>
 
-
-  <!-- <section class="cart-section">
-    <h2>Your Cart</h2>
-    <% if (!cart || cart.length === 0) { %>
-      <p>Your cart is empty.</p>
-    <% } else { %>
-      <ul>
-        <% for (const item of cart) { %>
-          <li>
-            <%= item.name %> × <%= item.quantity %> = $
-            <%= typeof item.price === 'number' ? (item.price * item.quantity).toFixed(2) : 'N/A' %>
-          </li>
-        <% } %>
-      </ul>
-      <p><strong>Total Items:</strong> <%= cartItemCount || 0 %></p>
-      <p><strong>Total Price:</strong> $
-        <%= typeof cartTotal === 'number' ? cartTotal.toFixed(2) : 'N/A' %>
-      </p>
-    <% } %>
-  </section> -->
-
-  <!-- <section class="checkout-section" style="margin: 20px 0;">
-    <form action="/checkout" method="post">
-      <button type="submit" class="submit_btn">Proceed to Checkout</button>
-    </form>
-  </section> -->
+    </header>
 
 
-  <!-- <section class="menu-section">
-    <h2>Select from our Menu</h2>
-    <div class="menu-container">
-      <% if (menu && menu.length > 0) { %>
-        <% for (const item of menu) { %>
-          <div class="food-item">
-            <div class="food-item-details">
-              <h3>
-                <%= item.name %>
-                <img src="<%= item.photo_url %>" style="max-width: 100px; max-height: 100px;"> &nbsp;&nbsp;
-                $<%= typeof item.price === 'number' ? item.price.toFixed(2) : 'N/A' %>
-              </h3>
-              <p><%= item.description %></p>
-            </div>
-            <div class="add-to-cart">
-              <form action="/add-to-cart" method="post">
-                <input type="hidden" name="itemId" value="<%= item.id %>">
-                <button type="submit" class="submit_btn">Add to Cart</button>
-              </form>
-            </div>
-          </div>
-        <% } %>
+    <!-- <section class="cart-section">
+      <h2>Your Cart</h2>
+      <% if (!cart || cart.length === 0) { %>
+        <p>Your cart is empty.</p>
       <% } else { %>
-        <p>No menu items to display</p>
+        <ul>
+          <% for (const item of cart) { %>
+            <li>
+              <%= item.name %> × <%= item.quantity %> = $
+              <%= typeof item.price === 'number' ? (item.price * item.quantity).toFixed(2) : 'N/A' %>
+            </li>
+          <% } %>
+        </ul>
+        <p><strong>Total Items:</strong> <%= cartItemCount || 0 %></p>
+        <p><strong>Total Price:</strong> $
+          <%= typeof cartTotal === 'number' ? cartTotal.toFixed(2) : 'N/A' %>
+        </p>
       <% } %>
-    </div>
-  </section> -->
-  <section class="menu-section">
-    <div class="menu-container"> <h3>Select from our Menu</h3>
-    <% if (menu && menu.length > 0) { %>
-        <% for (const item of menu) { %>
+    </section> -->
+
+    <!-- <section class="checkout-section" style="margin: 20px 0;">
+      <form action="/checkout" method="post">
+        <button type="submit" class="submit_btn">Proceed to Checkout</button>
+      </form>
+    </section> -->
+
+
+    <!-- <section class="menu-section">
+      <h2>Select from our Menu</h2>
+      <div class="menu-container">
+        <% if (menu && menu.length > 0) { %>
+          <% for (const item of menu) { %>
             <div class="food-item">
-                <div class="food-item-details">
-                    <h3><%= item.name %>
-                      <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;"> &nbsp &nbsp <%= item.price %>
-                      <h3>
-                    <p class="description"><%= item.description %> </p>
-                </div>
-
-                <div class="add-to-cart ">
-                  <form  class="add-to-cart-form" action="/add-to-cart" method="post">
-                    <input type="hidden" name="itemId" value="<%= item.id %>">
-                    <button type="submit" class="submit_btn">Add to Cart</button>
-                  </form>
-                </div>
-
+              <div class="food-item-details">
+                <h3>
+                  <%= item.name %>
+                  <img src="<%= item.photo_url %>" style="max-width: 100px; max-height: 100px;"> &nbsp;&nbsp;
+                  $<%= typeof item.price === 'number' ? item.price.toFixed(2) : 'N/A' %>
+                </h3>
+                <p><%= item.description %></p>
+              </div>
+              <div class="add-to-cart">
+                <form action="/add-to-cart" method="post">
+                  <input type="hidden" name="itemId" value="<%= item.id %>">
+                  <button type="submit" class="submit_btn">Add to Cart</button>
+                </form>
+              </div>
             </div>
+          <% } %>
+        <% } else { %>
+          <p>No menu items to display</p>
         <% } %>
-    <% } else { %>
-        <p>No menu items to display</p>
-    <% } %>
+      </div>
+    </section> -->
+    <div class="menu_headline">
+      <h1>Menu</h1>
     </div>
-  </section>
 
-  <script>
-    window.onscroll = function() {myFunction()};
+    <section class="menu-section">
+      <div class="menu-container"> <h3>Select from our Menu</h3>
+      <% if (menu && menu.length > 0) { %>
+          <% for (const item of menu) { %>
+              <div class="food-item">
+                  <div class="food-item-details">
+                      <h3><%= item.name %>
+                        <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;"> &nbsp &nbsp <%= item.price %>
+                        <h3>
+                      <p class="description"><%= item.description %> </p>
+                  </div>
 
-    let fixedHeader = document.getElementById("myHeader");
-    let sticky = fixedHeader.offsetTop;
+                  <div class="add-to-cart ">
+                    <form  class="add-to-cart-form" action="/add-to-cart" method="post">
+                      <input type="hidden" name="itemId" value="<%= item.id %>">
+                      <button type="submit" class="submit_btn">Add to Cart</button>
+                    </form>
+                  </div>
 
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-        fixedHeader.classList.add("sticky");
-      } else {
-        fixedHeader.classList.remove("sticky");
+              </div>
+          <% } %>
+      <% } else { %>
+          <p>No menu items to display</p>
+      <% } %>
+      </div>
+    </section>
+
+    <script>
+      window.onscroll = function() {myFunction()};
+
+      let fixedHeader = document.getElementById("myHeader");
+      let sticky = fixedHeader.offsetTop;
+
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          fixedHeader.classList.add("sticky");
+        } else {
+          fixedHeader.classList.remove("sticky");
+        }
       }
-    }
-  </script>
+    </script>
 
+
+  </div>
 
 
 </body>
