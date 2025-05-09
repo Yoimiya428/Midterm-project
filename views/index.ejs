@@ -28,7 +28,7 @@
       <div class="header-container">
 
         <div id="shop_title">
-          <h1>Tom Hartins</h1>
+          <span class="header">404Hunger</span>
         </div>
 
         <div class="header-right">
@@ -36,9 +36,12 @@
             Order: <span id="cart-quantity">0</span> | Total: $<span id="cart-total">0.00</span>
           </div>
 
-          <form action="/checkout" method="post">
+          <!-- <form action="/checkout" method="get">
             <button type="submit" class="checkout_btn">Proceed to Checkout</button>
-          </form>
+          </form> -->
+          <a href="./checkout">
+            <button type="button" class="checkout_btn">Proceed to Checkout</button>
+          </a>
         </div>
 
       </div>
