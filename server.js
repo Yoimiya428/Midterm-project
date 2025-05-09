@@ -41,7 +41,8 @@ app.use(express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
 const usersRoutes = require('./routes/users');
-const checkoutRoute = require('./routes/checkout');
+//  const checkoutRoute = require('./routes/checkout');
+// const checkoutRoutes = require('./routes/checkout');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -171,26 +172,26 @@ app.get('/checkout', (req, res) => {
   res.render('checkout', { message: null });
 });
 
-// const checkoutRoutes = require('./routes/checkout');
-// app.use('/checkout', checkoutRoutes);
+const checkoutRoutes = require('./routes/checkout');
+app.use('/checkout', checkoutRoutes);
 
-app.post('/checkout', (req, res) => {
-  const orderNumber = Math.floor(Math.random() * 10000);
-  const cart = temporaryCart;
+// app.post('/checkout', (req, res) => {
+  // const orderNumber = Math.floor(Math.random() * 10000);
+  // const cart = temporaryCart;
 
-  const totalPrice = cart.reduce((sum, item) => {
-    return sum + (item.price * item.quantity);
-  }, 0);
+  // const totalPrice = cart.reduce((sum, item) => {
+  //   return sum + (item.price * item.quantity);
+  // }, 0);
 
-  req.session.order = {
-    orderNumber,
-    totalPrice: totalPrice.toFixed(2),
-  };
+  // req.session.order = {
+  //   orderNumber,
+  //   totalPrice: totalPrice.toFixed(2),
+  // };
 
-  temporaryCart.length = 0;
+  // temporaryCart.length = 0;
 
-  res.redirect('/order-summary');
-});
+//   res.redirect('/checkout');
+// });
 
 
 const temporaryCart = [];
@@ -258,23 +259,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
