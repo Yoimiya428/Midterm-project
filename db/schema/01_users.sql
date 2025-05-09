@@ -25,14 +25,10 @@ CREATE TABLE menu_item (
   description TEXT,
   price MONEY,
   is_active BOOLEAN DEFAULT true,
-<<<<<<< HEAD
-  processing_time INT
-=======
   processing_time INT;
->>>>>>> origin/feature/sendSMS
 );
 
--- Order items    
+-- Order items
 CREATE TABLE order_item (
   id SERIAL PRIMARY KEY NOT NULL,
   order_id INTEGER NOT NULL REFERENCES orders(id),
@@ -40,9 +36,3 @@ CREATE TABLE order_item (
   quantity INTEGER,
   description TEXT
 );
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> origin/feature/sendSMS

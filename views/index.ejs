@@ -17,11 +17,9 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-
   <div class="body-container">
 
-    
+
 
 
     <header id="myHeader">
@@ -33,7 +31,7 @@
         <div id="cart-info">
           Order: <span id="cart-quantity">0</span> | Total: $<span id="cart-total">0.00</span>
         </div>
-    
+
         <form action="/checkout" method="post">
           <button type="submit" class="checkout_btn">Proceed to Checkout</button>
         </form>
@@ -147,10 +145,64 @@
 
 
 </body>
-=======
+
   <h1>Have fun! 🥔</h1>
   <a href="./checkout">Checkout</a>
 </body>
 
->>>>>>> origin/feature/sendSMS
+  <header id="myHeader">
+    <div id="shop_title">
+      <h1>My Restaurant</h1>
+    </div>
+
+    <div id="cart-info">
+      Order: <span id="cart-quantity">0</span> | Total: $<span id="cart-total">0.00</span>
+    </div>
+  </header>
+
+  <section class="menu-section">
+    <div class="menu-container"> <h3>Select from our Menu</h3>
+    <% if (menu && menu.length > 0) { %>
+        <% for (const item of menu) { %>
+            <div class="food-item">
+                <div class="food-item-details">
+                    <h3><%= item.name %>
+                      <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;"> &nbsp &nbsp <%= item.price %>
+                      <h3>
+                    <p class="description"><%= item.description %> </p>
+                </div>
+                <div class="add-to-cart ">
+                  <form  class="add-to-cart-form" action="/add-to-cart" method="post">
+                    <input type="hidden" name="itemId" value="<%= item.id %>">
+                    <button type="submit" class="Add_tocart_submit_btn">Add to Cart</button>
+                </form>
+                <form class="remove-from-cart-form" method="post" action="/remove-from-cart">
+                  <input type="hidden" name="itemId" value="<%= item.id %>">
+                  <button type="submit" class="rm_btn">Remove</button>
+                </form>
+
+              </div>
+            </div>
+        <% } %>
+    <% } else { %>
+        <p>No menu items to display</p>
+    <% } %>
+    </div>
+</section>
+
+<script>
+  window.onscroll = function() {myFunction()};
+  let fixedHeader = document.getElementById("myHeader");
+  let sticky = fixedHeader.offsetTop;
+
+  function myFunction() {
+    if (window.pageYOffset > sticky) {
+      fixedHeader.classList.add("sticky");
+    } else {
+      fixedHeader.classList.remove("sticky");
+    }
+  }
+
+  </script>
+</body>
 </html>

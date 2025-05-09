@@ -4,6 +4,8 @@ require('dotenv').config();
 // Web server config
 const express = require('express');
 const morgan = require('morgan');
+const session = require('express-session');
+
 //const router  = express.Router();
 const {
   getMenuItems,
@@ -17,6 +19,16 @@ const app = express();
 app.use(express.json());
 
 app.set('view engine', 'ejs');
+const db = require('./db/connection');
+
+const crypto = require('crypto');
+const secretKey = crypto.randomBytes(32).toString('hex');
+app.use(session({
+  secret: secretKey,  //  Change this to a strong, random string!
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } //  Set to true if using HTTPS
+}));
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -35,18 +47,16 @@ const checkoutRoute = require('./routes/checkout');
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 
-
-//disable for now, save for later
-// app.get('/', (req, res) => {
-//   getMenuItems()
-//     .then(menuItems => {
-//       //res.json({ menuItems });
-//       res.render('index', { menu: menuItems });
-//     })
-//     .catch(err => {
-//       res.status(500).json({ error: err.message });
-//     });
-// });
+app.get('/', (req, res) => {
+  getMenuItems()
+    .then(menuItems => {
+      //res.json({ menuItems });
+      res.render('index', { menu: menuItems });
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
 
 
 // Note: mount other resources here, using the same pattern above
@@ -243,23 +253,6 @@ app.get('/', (req, res) => {
       res.status(500).send("Error loading menu");
     });
 });
-
-
-
-
-
-
-
-// app.get('/', (req, res) => {
-//   getMenuItems()
-//     .then(menu => {
-//       const cart = req.session.cart || [];
-//       res.render('index', { menu, cart });
-//     })
-//     .catch(err => {
-//       res.status(500).json({ error: err.message });
-//     });
-// });
 
 
 app.listen(PORT, () => {

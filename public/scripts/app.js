@@ -1,4 +1,3 @@
-// Client facing scripts here
 $(document).ready(function () {
   const cart = {
     items: {}, // { itemId: { quantity, price } }
@@ -17,7 +16,7 @@ $(document).ready(function () {
     const priceMatch = priceText.match(/(\d+(\.\d+)?)/g);
     const price = parseFloat(priceMatch ? priceMatch[priceMatch.length - 1] : 0);
 
-    // Update the cart
+    // Update the carts
     if (!cart.items[itemId]) {
       cart.items[itemId] = { quantity: 0, price };
     }
