@@ -147,7 +147,7 @@ app.use(session({
   secret: 'top secret',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 30 * 60 * 1000 } 
+  cookie: { maxAge: 10 * 60 * 1000 } 
 }));
 
 

@@ -17,9 +17,25 @@
 </head>
 <body>
 
-  <h1>Enjoy your meal 🥔</h1>
+  <header id="myHeader">
+    <div id="shop_title">
+      <h1>Tom Hartins</h1>
+    </div>
 
-  <section class="cart-section">
+    <div class="header-right">
+      <div id="cart-info">
+        Order: <span id="cart-quantity">0</span> | Total: $<span id="cart-total">0.00</span>
+      </div>
+  
+      <form action="/checkout" method="post">
+        <button type="submit" class="checkout_btn">Proceed to Checkout</button>
+      </form>
+    </div>
+
+  </header>
+
+
+  <!-- <section class="cart-section">
     <h2>Your Cart</h2>
     <% if (!cart || cart.length === 0) { %>
       <p>Your cart is empty.</p>
@@ -37,16 +53,16 @@
         <%= typeof cartTotal === 'number' ? cartTotal.toFixed(2) : 'N/A' %>
       </p>
     <% } %>
-  </section>
+  </section> -->
 
-  <section class="checkout-section" style="margin: 20px 0;">
+  <!-- <section class="checkout-section" style="margin: 20px 0;">
     <form action="/checkout" method="post">
       <button type="submit" class="submit_btn">Proceed to Checkout</button>
     </form>
-  </section>
+  </section> -->
 
 
-  <section class="menu-section">
+  <!-- <section class="menu-section">
     <h2>Select from our Menu</h2>
     <div class="menu-container">
       <% if (menu && menu.length > 0) { %>
@@ -72,7 +88,50 @@
         <p>No menu items to display</p>
       <% } %>
     </div>
+  </section> -->
+  <section class="menu-section">
+    <div class="menu-container"> <h3>Select from our Menu</h3>
+    <% if (menu && menu.length > 0) { %>
+        <% for (const item of menu) { %>
+            <div class="food-item">
+                <div class="food-item-details">
+                    <h3><%= item.name %>
+                      <img src="<%= item.photo_url%>" style="max-width: 100px; max-height: 100px;"> &nbsp &nbsp <%= item.price %>
+                      <h3>
+                    <p class="description"><%= item.description %> </p>
+                </div>
+
+                <div class="add-to-cart ">
+                  <form  class="add-to-cart-form" action="/add-to-cart" method="post">
+                    <input type="hidden" name="itemId" value="<%= item.id %>">
+                    <button type="submit" class="submit_btn">Add to Cart</button>
+                  </form>
+                </div>
+
+            </div>
+        <% } %>
+    <% } else { %>
+        <p>No menu items to display</p>
+    <% } %>
+    </div>
   </section>
+
+  <script>
+    window.onscroll = function() {myFunction()};
+
+    let fixedHeader = document.getElementById("myHeader");
+    let sticky = fixedHeader.offsetTop;
+
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        fixedHeader.classList.add("sticky");
+      } else {
+        fixedHeader.classList.remove("sticky");
+      }
+    }
+  </script>
+
+
 
 </body>
 </html>
