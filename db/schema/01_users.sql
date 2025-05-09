@@ -23,7 +23,8 @@ CREATE TABLE menu_item (
   photo_url TEXT,
   description TEXT,
   price MONEY,
-  is_active BOOLEAN DEFAULT true
+  is_active BOOLEAN DEFAULT true,
+  processing_time INT
 );
 
 -- Order items    
