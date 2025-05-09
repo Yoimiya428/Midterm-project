@@ -43,8 +43,13 @@
                 <div class="add-to-cart ">
                   <form  class="add-to-cart-form" action="/add-to-cart" method="post">
                     <input type="hidden" name="itemId" value="<%= item.id %>">
-                    <button type="submit" class="submit_btn">Add to Cart</button>
+                    <button type="submit" class="Add_tocart_submit_btn">Add to Cart</button>
                 </form>
+                <form class="remove-from-cart-form" method="post" action="/remove-from-cart">
+                  <input type="hidden" name="itemId" value="<%= item.id %>">
+                  <button type="submit" class="rm_btn">Remove</button>
+                </form>
+
               </div>
             </div>
         <% } %>

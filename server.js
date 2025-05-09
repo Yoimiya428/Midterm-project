@@ -48,7 +48,6 @@ const usersRoutes = require('./routes/users');
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 
-
 app.get('/', (req, res) => {
   getMenuItems()
     .then(menuItems => {
@@ -172,8 +171,3 @@ app.get('/add-to-cart', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-
-
-
-

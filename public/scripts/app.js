@@ -1,39 +1,3 @@
-/* $(document).ready(function() {
-  $('.delete-button').on('click', function(event) {
-    event.preventDefault();
-
-    const itemId = $(this).data('item-id');
-
-    if (confirm('Are you sure you want to delete this item?')) {
-      fetch(`/admin/menu/${itemId}`, {
-        method: 'DELETE'
-      })
-      .then(response => {
-        if (!response.ok) {
-          return response.json().then(err => {
-            throw new Error(err.message);
-          });
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data.message);
-        // to Remove the item from the DOM
-        const itemElement = document.querySelector(`.food-item[data-item-id="${itemId}"]`);
-        if (itemElement) {
-          itemElement.remove();
-        }
-      })
-      .catch(error => {
-        alert('Failed to delete item: ' + error.message);
-        console.error('Error:', error);
-      });
-    }
-  });
-});
- */
-
-
 $(document).ready(function () {
   const cart = {
     items: {}, // { itemId: { quantity, price } }

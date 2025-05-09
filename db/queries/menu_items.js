@@ -3,7 +3,7 @@ const db = require('../connection');
 //========FETCH MENU ITEMS=======
 // Render/fetches Menu items and displays on homepage
 const getMenuItems = () => {
-  return db.query('SELECT * FROM menu_item ORDER BY menu_item.id DESC;')
+  return db.query('SELECT * FROM menu_item WHERE is_active = true ORDER BY menu_item.id DESC;')
     .then(data => {
       return data.rows;
     });
@@ -75,4 +75,3 @@ const updateMenuItem = function (id, menuItem) {
 
 //====EXPORT THE FUNCTIONS=======
 module.exports = { getMenuItems, addMenuItem, getMenuItemById, updateMenuItem };
-
