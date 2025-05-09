@@ -151,7 +151,7 @@ app.post('/admin/menu/update/:id', (req, res) => {
 
 
 //newly added
-const session = require('express-session');
+
 
 app.use(session({
   secret: 'top secret',
