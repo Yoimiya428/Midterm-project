@@ -25,13 +25,6 @@ body {
 
 .header {
   display: flex;
-<<<<<<< HEAD
-  flex-direction: column;
-  align-items: center; 
-  min-height: 100vh;
-
-  background: white;
-=======
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -62,7 +55,6 @@ form {
 .btn btn-dark {
   padding: 10px 20px;
   font-size: 1.1rem;
->>>>>>> origin/feature/sendSMS
 }
 
 .body-container {

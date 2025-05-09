@@ -1,0 +1,164 @@
+
+body{
+  background-color: antiquewhite;
+}
+.add-new-menu-item{
+  border: none;
+  border-radius:20px 10px 20px 10px ;
+  width: 500px;
+  margin-top: 20px;
+  margin: auto;
+  text-align: center;
+  margin-top: 30px;
+  padding-bottom: 20px;
+  font-size: large;
+  /* background-color:#abb4bd; */
+  background-color: lightgray;
+  box-shadow: 10px 10px 15px 5px;
+
+}
+
+legend {
+  background-color: #000;
+  border-radius:20px 10px ;
+  color: #fff;
+  padding: 3px 6px;
+  height: 50px;
+  padding-top: 15px;
+}
+
+input {
+  margin: 20px;
+  width: 70px;
+  height: 25px;
+}
+
+
+
+a{
+  text-decoration: none;
+}
+.edit-menu-items{
+  border: 1px solid dimgray;
+}
+
+.header-add-new-menu-item{
+  background-color:aliceblue;
+  width: 100%;
+  height: 80px;
+  font-family: Bungee;
+  font-size:x-large;
+  padding-left: 30px;
+  padding-top: 23px;
+
+}
+input{
+  width: 300px;
+  margin: 20px;
+  height: 35px;
+}
+
+.cancel-btn {
+  width: 70px;
+  height: 30px;
+  background-color:#fff;
+  border-radius: 10px 5px;
+  font-size: 16px;
+  border: 1px solid black;
+  margin-right: 50px;
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+.cancel-btn:hover{
+background-color: antiquewhite;
+  color:#000;
+
+}
+
+.btns{
+  display: flex;
+  padding-left: 90px;
+  margin-top: 20px;
+}
+
+.edit-btns{
+  display: flex;
+  padding-left: 100px;
+  margin-top: 20px;
+}
+
+textarea{
+  width: 300px;
+  height: 150px;
+}
+
+.submit-btn{
+  width: 140px;
+  height: 30px;
+  background-color:#fff;
+  color: #000;
+  border-radius: 10px 5px;
+  font-size: 16px;
+  margin-right: 30px;
+}
+
+.submit-btn-edit{
+  width: 70px;
+  height: 30px;
+  background-color:#fff;
+  color: #000;
+  border-radius: 10px 5px;
+  font-size: 16px;
+  margin-right: 30px;
+}
+
+.edit-button{
+  width: 70px;
+  height: 30px;
+  background-color:#fff;
+  color: #000;
+  border-radius: 10px 5px;
+  font-size: 16px;
+  margin-right: 30px;
+}
+
+.delete-button{
+  width: 70px;
+  height: 30px;
+  background-color:#fff;
+  color: #000;
+  border-radius: 10px 5px;
+  font-size: 16px;
+  margin-right: 30px;
+}
+
+#admin_div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+#menu-title{
+  background-color: black;
+  width: 100px;
+  height: 60px;
+  color: #fff;
+  text-align: center;
+  padding-top: 8px;
+  border-radius: 10px;
+}
+
+#add-new-menu{
+  background-color: black;
+  width: 180px;
+  height: 100px;
+  color: #fff;
+  text-align: center;
+  padding-top: 8px;
+  border-radius: 10px;
+}
